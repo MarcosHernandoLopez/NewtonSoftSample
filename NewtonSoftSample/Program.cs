@@ -40,6 +40,21 @@ namespace NewtonSoftSample
                 Name = "Henry",
                 Identifiers = new List<int> { 1, 2, 3, 4 }
             };
+            var data1 = new DataStructure
+            {
+                Name = "Luis",
+                Identifiers = new List<int> { 2, 3, 4, 5 }
+            };
+            var data2 = new DataStructure
+            {
+                Name = "Antonio",
+                Identifiers = new List<int> { 3, 4, 5, 6 }
+            };
+            var data3 = new DataStructure
+            {
+                Name = "Manolo",
+                Identifiers = new List<int> { 4, 5, 6, 7 }
+            };
 
             Console.WriteLine("Object before serialization:");
             Console.WriteLine("----------------------------");
@@ -47,16 +62,31 @@ namespace NewtonSoftSample
             Console.WriteLine(data);
 
             Console.WriteLine(data.Name);
+            Console.WriteLine(data1.Name);
+            Console.WriteLine(data2.Name);
+            Console.WriteLine(data3.Name);
 
-            Serialize(data, "./data1.json");
+            Serialize(data, "./data.json");
+            Serialize(data1, "./data1.json");
+            Serialize(data2, "./data2.json");
+            Serialize(data3, "./data3.json");
 
-            var deserialized = Deserialize<DataStructure>("./data1.json");
+            var deserialized = Deserialize<DataStructure>("./data.json");
+            var deserialized1 = Deserialize<DataStructure>("./data1.json");
+            var deserialized2 = Deserialize<DataStructure>("./data2.json");
+            var deserialized3 = Deserialize<DataStructure>("./data3.json");
 
             Console.WriteLine("Deserialized (json) string:");
             Console.WriteLine("---------------------------");
             Console.WriteLine();
             Console.WriteLine(deserialized);
+            Console.WriteLine(deserialized1);
+            Console.WriteLine(deserialized2);
+            Console.WriteLine(deserialized3);
             Console.WriteLine(deserialized.Name);
+            Console.WriteLine(deserialized1.Name);
+            Console.WriteLine(deserialized2.Name);
+            Console.WriteLine(deserialized3.Name);
 
             var persona = new Persona
             {
@@ -67,6 +97,8 @@ namespace NewtonSoftSample
             Serialize(persona, "./data2.json");
 
             var deserializedPersona = Deserialize<Persona>("./data2.json");
+
+            Console.ReadLine();
         }
     }
 }

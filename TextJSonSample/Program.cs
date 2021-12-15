@@ -31,25 +31,47 @@ namespace TextJSonSample
 
         static async Task Main(string[] args)
         {
-            var data = new DataStructure
+            var cl1 = new Cliente()
             {
-                Name = "Henry",
-                Identifiers = new List<int> { 1, 2, 3, 4 }
+                idCliente = Guid.NewGuid(),
+                Nombre = "Marcos",
+                Apellidos = "Hernando López",
             };
+
+            cl1.Vehiculos = new List<Vehiculo>(
+                   new[] {
+                       new Vehiculo
+                       {
+                           idVehiculo = Guid.NewGuid(),
+                           Matricula = "0000-AAA",
+                           Modelo = "Mercedes",
+                           color = Color.Azul,
+                           cliente = cl1
+                       },
+                       new Vehiculo
+                       {
+                           idVehiculo = Guid.NewGuid(),
+                           Matricula = "0000-BBB",
+                           Modelo = "BMW",
+                           color = Color.Rojo,
+                           cliente = cl1
+                       }
+                   });
 
             Console.WriteLine("Object before serialization:");
             Console.WriteLine("----------------------------");
             Console.WriteLine();
-            Console.WriteLine(data);
+            Console.WriteLine(cl1);
 
-            await Serialize(data, "./fichero.json");
+            await Serialize(cl1, "./fichero.json");
 
-            var deserialized = await Deserialize<DataStructure>("./fichero.json");
+            var deserialized = await Deserialize<Cliente>("./fichero.json");
 
             Console.WriteLine("Deserialized (json) string:");
             Console.WriteLine("---------------------------");
             Console.WriteLine();
             Console.WriteLine(deserialized);
+            Console.ReadLine();
         }
     }
 }
